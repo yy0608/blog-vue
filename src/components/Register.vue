@@ -12,9 +12,7 @@
       <div class="title">重复密码：</div>
       <input type="password" v-model="repeatPassword" placeholder="请再次输入密码">
     </div>
-    <div class="join-item">
-      <a class="normal-button" href="javascript:void(0);" @click="register()">注册</a>
-    </div>
+    <a class="normal-button" href="javascript:void(0);" @click="register()">注册</a>
   </div>
 </template>
 
@@ -34,6 +32,10 @@ export default {
   },
   methods: {
     register () {
+      if (!this.data.password.trim() || !this.data.username.trim()) {
+        console.log('用户名和密码不能为空')
+        return
+      }
       if (this.data.password !== this.repeatPassword) {
         console.log('两次密码输入不相同')
         return
@@ -41,6 +43,9 @@ export default {
       axios.post(origin + '/api/user/register', { ...this.data })
         .then(res => {
           console.log(res.data)
+          if (!res.data.code) {
+            this.$emit('needChangeTab')
+          }
         })
         .catch(err => {
           console.log(err)

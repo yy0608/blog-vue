@@ -12,3 +12,7 @@ export default {
   store
 }
 </script>
+
+<style lang="scss">
+@import './assets/common.scss';
+</style>

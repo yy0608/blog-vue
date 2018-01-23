@@ -8,9 +8,7 @@
       <div class="title">密码：</div>
       <input type="password" v-model="data.password" placeholder="请输入密码">
     </div>
-    <div class="join-item">
-      <a class="normal-button" href="javascript:void(0);" @click="login()">登录</a>
-    </div>
+    <a class="normal-button" href="javascript:void(0);" @click="login()">登录</a>
   </div>
 </template>
 
@@ -30,7 +28,7 @@ export default {
   methods: {
     login () {
       if (!this.data.password.trim() || !this.data.username.trim()) {
-        console.log('用户名或密码不能为空')
+        console.log('用户名和密码不能为空')
         return
       }
       axios({
@@ -48,16 +46,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-      // axios.post(origin + '/api/user/login', { ...this.data })
-      //   .then(res => {
-      //     console.log(res.data)
-      //     if (res.data.user_info) {
-      //       this.$store.dispatch('setUserInfo', res.data.user_info)
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
     }
   }
 }
