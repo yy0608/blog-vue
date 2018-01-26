@@ -10,9 +10,9 @@
     </div>
     <div class="join-item">
       <div class="title">重复密码：</div>
-      <input type="password" v-model="repeatPassword" placeholder="请再次输入密码">
+      <input type="password" v-model="repeatPassword" @keyup.enter="register" placeholder="请再次输入密码">
     </div>
-    <a class="normal-button" href="javascript:void(0);" @click="register()">注册</a>
+    <a class="normal-button" href="javascript:void(0);" @click="register">注册</a>
   </div>
 </template>
 

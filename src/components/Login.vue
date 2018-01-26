@@ -6,9 +6,9 @@
     </div>
     <div class="join-item">
       <div class="title">密码：</div>
-      <input type="password" v-model="data.password" placeholder="请输入密码">
+      <input type="password" v-model="data.password" @keyup.enter="login" placeholder="请输入密码">
     </div>
-    <a class="normal-button" href="javascript:void(0);" @click="login()">登录</a>
+    <a class="normal-button" href="javascript:void(0);" @click="login">登录</a>
   </div>
 </template>
 

@@ -2,8 +2,8 @@
 <div class="bf login-register">
   <template v-if="!userInfo || !userInfo.username">
     <div class="tabs-cont">
-      <div :class="[tabName === 'login' ? 'current' : '', 'tab-item' ]" @click="switchTab()">登录</div>
-      <div :class="[tabName === 'register' ? 'current' : '', 'tab-item' ]" @click="switchTab()">注册</div>
+      <div :class="[tabName === 'login' ? 'current' : '', 'tab-item' ]" @click="switchTab(0)">登录</div>
+      <div :class="[tabName === 'register' ? 'current' : '', 'tab-item' ]" @click="switchTab(1)">注册</div>
     </div>
     <register v-if="tabName === 'register'" @needChangeTab="switchTab()"></register>
     <login v-if="tabName === 'login'"></login>
@@ -41,8 +41,8 @@ export default {
     this.checkLoginByCookie()
   },
   methods: {
-    switchTab () {
-      this.tabName = this.tabName === 'login' ? 'register' : 'login'
+    switchTab (index) {
+      this.tabName = index ? 'register' : 'login'
     },
     logout () {
       this.$store.dispatch('setUserInfo', null)

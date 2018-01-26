@@ -1,5 +1,6 @@
 const state = {
-  userInfo: null
+  userInfo: null,
+  userList: null
 }
 
 export default state

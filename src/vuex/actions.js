@@ -34,7 +34,25 @@ const actions = {
         withCredentials: true
       })
         .then(res => {
+          commit('setUserList', res.data.user_list)
           resolve(res)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
+  deleteUser ({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: origin + '/admin/user_delete',
+        data: { _id: data._id },
+        method: 'post',
+        withCredentials: true
+      })
+        .then(res => {
+          commit('changeUserList', { index: data.index })
+          resolve(res.data)
         })
         .catch(err => {
           reject(err)
