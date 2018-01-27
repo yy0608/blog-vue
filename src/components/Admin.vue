@@ -2,7 +2,7 @@
 <div class="admin-container" :style="{height: winHeight + 'px'}">
   <div class="admin-header">
     <div class="router-cont">
-      <router-link v-for="(item, index) in routerData" :key="index" :to="item.path" class="router-link" active-class="active">{{item.label}}</router-link>
+      <router-link v-for="(item, index) in routerData" :key="index" :to="item.path" :class="[item.active ? 'active': '', 'router-link']" active-class="active">{{item.label}}</router-link>
     </div>
     <a href="javascript:void(0);" class="router-link" @click="logout()">退出</a>
   </div>
@@ -21,6 +21,10 @@ export default {
           label: '用户管理'
         },
         {
+          path: '/admin/category',
+          label: '分类管理'
+        },
+        {
           path: '/admin/topics',
           label: '帖子管理'
         }
@@ -29,6 +33,14 @@ export default {
   },
   created () {
     this.winHeight = window.innerHeight
+  },
+  watch: {
+    '$route': (route) => {
+      if (/category/.test(route.path)) {
+        console.log(this.$state)
+        // this.routerData[1].active = true
+      }
+    }
   },
   methods: {
     logout () {
@@ -52,6 +64,7 @@ export default {
   display: flex;
   border-bottom: solid 1px #e6e6e6;
   background-color: #fff;
+  background: linear-gradient(to bottom, #fff, #eaeaea);
 }
 .router-cont {
   display: flex;

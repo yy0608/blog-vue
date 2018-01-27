@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { Home, Register, Admin } from '@/components'
-import { Users, Topics } from '@/components/admin/index.js'
+import { Users, Topics, Category, CategoryAdd } from '@/components/admin/index.js'
 
 Vue.use(Router)
 
@@ -31,6 +31,16 @@ const router = new Router({
           path: 'users',
           name: 'AdminUsers',
           component: Users
+        },
+        {
+          path: 'category',
+          name: 'AdminCategory',
+          component: Category
+        },
+        {
+          path: 'category_add',
+          name: 'AdminCategoryAdd',
+          component: CategoryAdd
         },
         {
           path: 'topics',

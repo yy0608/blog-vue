@@ -7,6 +7,9 @@ const mutations = {
   },
   changeUserList (state, index) { // 根据index删除1条数据
     state.userList.splice(index, 1)
+  },
+  decreaseUserCount (state) {
+    state.userCount--
   }
 }
 

@@ -26,15 +26,17 @@ const actions = {
         })
     })
   },
-  getUserList ({ commit }) {
+  getUserList ({ commit, state }, params) {
     return new Promise((resolve, reject) => {
       axios({
         url: origin + '/admin/user_list',
         method: 'get',
+        params,
         withCredentials: true
       })
         .then(res => {
           commit('setUserList', res.data.user_list)
+          state.userCount = res.data.total_count
           resolve(res)
         })
         .catch(err => {
@@ -51,6 +53,7 @@ const actions = {
         withCredentials: true
       })
         .then(res => {
+          commit('decreaseUserCount')
           commit('changeUserList', { index: data.index })
           resolve(res.data)
         })

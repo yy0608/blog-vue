@@ -28,6 +28,12 @@
       </template>
     </el-table-column>
   </el-table>
+  <el-pagination
+    layout="prev, pager, next"
+    @current-change="pageChange"
+    :page-size="2"
+    :total="userCount">
+  </el-pagination>
 </div>
 </template>
 
@@ -35,23 +41,34 @@
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      queryParams: {
+        page: 1,
+        limit: 2
+      }
+    }
+  },
   computed: mapState([
-    'userList'
+    'userList',
+    'userCount'
   ]),
   created () {
-    this.$store.dispatch('getUserList')
-      .then(res => {
-        console.log('获取用户列表成功')
-      })
-      .catch(err => {
-        console.log(err)
-        this.$message({
-          message: '获取用户列表失败',
-          type: 'error'
-        })
-      })
+    this.getUserList()
   },
   methods: {
+    getUserList () {
+      this.$store.dispatch('getUserList', this.queryParams)
+        .then(res => {
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            message: '获取用户列表失败',
+            type: 'error'
+          })
+        })
+    },
     deleteUser (_id, index) {
       this.$confirm('删除用户？', '提示')
         .then(() => {
@@ -72,6 +89,10 @@ export default {
           })
         })
         .catch(() => {})
+    },
+    pageChange (page) {
+      this.queryParams.page = page
+      this.getUserList()
     }
   }
 }
