@@ -33,14 +33,10 @@ export default {
   },
   created () {
     this.winHeight = window.innerHeight
-  },
-  watch: {
-    '$route': (route) => {
-      if (/category/.test(route.path)) {
-        console.log(this.$state)
-        // this.routerData[1].active = true
-      }
-    }
+    this.checkPathHasCategory(this.$route.path)
+    this.$watch('$route', function (newVal, oldVal) {
+      this.checkPathHasCategory(newVal.path)
+    })
   },
   methods: {
     logout () {
@@ -50,6 +46,13 @@ export default {
       this.$router.push({
         path: '/'
       })
+    },
+    checkPathHasCategory (path) {
+      if (/category/.test(path)) {
+        this.routerData[1].active = true
+      } else {
+        this.routerData[1].active = false
+      }
     }
   }
 }
@@ -62,6 +65,7 @@ export default {
 }
 .admin-header {
   display: flex;
+  flex-shrink: 0;
   border-bottom: solid 1px #e6e6e6;
   background-color: #fff;
   background: linear-gradient(to bottom, #fff, #eaeaea);

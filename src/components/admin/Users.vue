@@ -28,33 +28,27 @@
       </template>
     </el-table-column>
   </el-table>
-  <el-pagination
+  <pagination :count="userCount" :change="pageChange"></pagination>
+  <!-- <el-pagination
     layout="prev, pager, next"
     @current-change="pageChange"
     :page-size="2"
     :total="userCount">
-  </el-pagination>
+  </el-pagination> -->
 </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Pagination from '../Pagination.vue'
 
 export default {
-  data () {
-    return {
-      queryParams: {
-        page: 1,
-        limit: 2
-      }
-    }
-  },
   computed: mapState([
     'userList',
     'userCount'
   ]),
-  created () {
-    this.getUserList()
+  components: {
+    Pagination
   },
   methods: {
     getUserList () {
@@ -90,8 +84,7 @@ export default {
         })
         .catch(() => {})
     },
-    pageChange (page) {
-      this.queryParams.page = page
+    pageChange () {
       this.getUserList()
     }
   }

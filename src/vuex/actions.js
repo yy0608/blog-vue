@@ -26,12 +26,15 @@ const actions = {
         })
     })
   },
-  getUserList ({ commit, state }, params) {
+  getUserList ({ commit, state }) {
     return new Promise((resolve, reject) => {
       axios({
-        url: origin + '/admin/user_list',
+        url: origin + '/admin/user/list',
         method: 'get',
-        params,
+        params: {
+          page: state.page,
+          limit: state.limit
+        },
         withCredentials: true
       })
         .then(res => {
@@ -47,7 +50,7 @@ const actions = {
   deleteUser ({ commit }, data) {
     return new Promise((resolve, reject) => {
       axios({
-        url: origin + '/admin/user_delete',
+        url: origin + '/admin/user/delete',
         data: { _id: data._id },
         method: 'post',
         withCredentials: true
@@ -56,6 +59,27 @@ const actions = {
           commit('decreaseUserCount')
           commit('changeUserList', { index: data.index })
           resolve(res.data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
+  getCategoryList ({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        withCredentials: true,
+        params: {
+          page: state.page,
+          limit: state.limit
+        },
+        url: origin + '/admin/category/list'
+      })
+        .then(res => {
+          state.categoryList = res.data.category_list
+          state.categoryCount = res.data.total_count
+          resolve(res)
         })
         .catch(err => {
           reject(err)

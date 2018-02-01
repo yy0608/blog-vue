@@ -30,12 +30,18 @@ const router = new Router({
         {
           path: 'users',
           name: 'AdminUsers',
-          component: Users
+          component: Users,
+          meta: {
+            hasPage: true
+          }
         },
         {
           path: 'category',
           name: 'AdminCategory',
-          component: Category
+          component: Category,
+          meta: {
+            hasPage: true
+          }
         },
         {
           path: 'category_add',
@@ -54,7 +60,20 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   let store = router.app.$options.components.App.store
-  let userInfo = store.state.userInfo
+  let state = store.state
+  let userInfo = state.userInfo
+  if (to.path !== from.path) { // 如果路由变化，还原到默认页码数设置
+    store.commit('resetPage')
+  }
+  if (!Object.keys(to.query).length && to.meta.hasPage) {
+    return next({
+      path: to.path,
+      query: {
+        page: state.page,
+        limit: state.limit
+      }
+    })
+  }
   if (!/admin/.test(to.path)) {
     return next()
   }
