@@ -3,7 +3,7 @@
   layout="total, sizes, prev, pager, next, jumper"
   @current-change="pageChange"
   @size-change="sizeChange"
-  :page-sizes="[2, 4, 6, 8]"
+  :page-sizes="[10, 15, 20, 30]"
   :current-page="page"
   :page-size="limit"
   :total="count">
@@ -54,6 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 .el-pagination {
-  padding: 20px 0;
+  padding: 20px 10px;
 }
 </style>

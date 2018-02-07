@@ -1,11 +1,13 @@
 import Users from './Users.vue'
 import Topics from './Topics.vue'
-import Category from './Category.vue'
+import Categories from './Categories.vue'
 import CategoryAdd from './CategoryAdd.vue'
+import TopicAdd from './TopicAdd.vue'
 
 export {
   Users,
   Topics,
-  Category,
-  CategoryAdd
+  Categories,
+  CategoryAdd,
+  TopicAdd
 }

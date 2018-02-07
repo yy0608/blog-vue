@@ -4,7 +4,8 @@
     <div class="router-cont">
       <router-link v-for="(item, index) in routerData" :key="index" :to="item.path" :class="[item.active ? 'active': '', 'router-link']" active-class="active">{{item.label}}</router-link>
     </div>
-    <a href="javascript:void(0);" class="router-link" @click="logout()">退出</a>
+    <a href="javascript:void(0);" class="router-link" @click="goIndex">首页</a>
+    <a href="javascript:void(0);" class="router-link" @click="logout">退出</a>
   </div>
   <router-view></router-view>
 </div>
@@ -26,16 +27,16 @@ export default {
         },
         {
           path: '/admin/topics',
-          label: '帖子管理'
+          label: '文章管理'
         }
       ]
     }
   },
   created () {
     this.winHeight = window.innerHeight
-    this.checkPathHasCategory(this.$route.path)
+    this.checkPathHasString(this.$route.path)
     this.$watch('$route', function (newVal, oldVal) {
-      this.checkPathHasCategory(newVal.path)
+      this.checkPathHasString(newVal.path)
     })
   },
   methods: {
@@ -47,12 +48,20 @@ export default {
         path: '/'
       })
     },
-    checkPathHasCategory (path) {
+    checkPathHasString (path) {
       if (/category/.test(path)) {
         this.routerData[1].active = true
       } else {
         this.routerData[1].active = false
       }
+      if (/topic/.test(path)) {
+        this.routerData[2].active = true
+      } else {
+        this.routerData[2].active = false
+      }
+    },
+    goIndex (e) {
+      this.$router.push('/')
     }
   }
 }

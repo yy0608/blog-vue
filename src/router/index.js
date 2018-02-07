@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, Register, Admin } from '@/components'
-import { Users, Topics, Category, CategoryAdd } from '@/components/admin/index.js'
+import { Home, Register, Admin, TopicList } from '@/components'
+import { Users, Topics, Categories, CategoryAdd, TopicAdd } from '@/components/admin/index.js'
 
 Vue.use(Router)
 
@@ -9,8 +9,27 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      // name: 'Home',
+      component: Home,
+      children: [
+        {
+          path: '',
+          redirect: {
+            name: 'TopicList',
+            params: {
+              _id: 'index'
+            }
+          }
+        },
+        {
+          path: 'category/:_id',
+          name: 'TopicList',
+          component: TopicList,
+          meta: {
+            hasPage: true
+          }
+        }
+      ]
     },
     {
       path: '/register',
@@ -38,7 +57,7 @@ const router = new Router({
         {
           path: 'category',
           name: 'AdminCategory',
-          component: Category,
+          component: Categories,
           meta: {
             hasPage: true
           }
@@ -51,7 +70,15 @@ const router = new Router({
         {
           path: 'topics',
           name: 'AdminTopics',
-          component: Topics
+          component: Topics,
+          meta: {
+            hasPage: true
+          }
+        },
+        {
+          path: 'topic_add',
+          name: 'TopicAdd',
+          component: TopicAdd
         }
       ]
     }

@@ -4,6 +4,7 @@
     <el-table-column
       prop="_id"
       label="_id"
+      min-width="110px"
     />
     <el-table-column
       prop="username"
@@ -17,6 +18,9 @@
       label="是否管理员"
     >
       <template slot-scope="props">{{props.row.isAdmin ? '是' : '否'}}</template>
+    </el-table-column>
+    <el-table-column label="注册时间">
+      <template slot-scope="props">{{parseDate(props.row.created_ts)}}</template>
     </el-table-column>
     <el-table-column
       label="操作"
@@ -41,8 +45,14 @@
 <script>
 import { mapState } from 'vuex'
 import Pagination from '../Pagination.vue'
+import { parseDate } from '@/utils'
 
 export default {
+  data () {
+    return {
+      parseDate
+    }
+  },
   computed: mapState([
     'userList',
     'userCount'

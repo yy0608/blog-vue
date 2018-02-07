@@ -21,6 +21,18 @@ const mutations = {
   },
   resetPage (state) {
     state.page = query.page
+  },
+  changeCategoryList (state, index) {
+    state.categoryList.splice(index, 1)
+  },
+  decreaseCategoryCount (state) {
+    state.categoryCount--
+  },
+  changeTopicList (state, index) {
+    state.topicList.splice(index, 1)
+  },
+  decreaseTopicCount (state) {
+    state.topicCount--
   }
 }
 

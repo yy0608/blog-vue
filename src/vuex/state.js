@@ -7,7 +7,11 @@ const state = {
   userList: null,
   userCount: null,
   categoryCount: null,
-  categoryList: null
+  categoryList: null,
+  topicCount: null,
+  topicList: null,
+  homeTopicList: null,
+  homeTopicCount: null
 }
 
 export default state
