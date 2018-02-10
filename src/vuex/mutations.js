@@ -33,6 +33,18 @@ const mutations = {
   },
   decreaseTopicCount (state) {
     state.topicCount--
+  },
+  setCommentsList (state, comments) {
+    state.commentsList = comments
+  },
+  setCommentsCount (state, count) {
+    state.commentsCount = count
+  },
+  insertComment (state, comment) {
+    state.commentsList.unshift(comment)
+  },
+  increaseCommentsCount (state) {
+    state.commentsCount++
   }
 }
 

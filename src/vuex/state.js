@@ -11,7 +11,9 @@ const state = {
   topicCount: null,
   topicList: null,
   homeTopicList: null,
-  homeTopicCount: null
+  homeTopicCount: null,
+  commentsCount: null,
+  commentsList: null
 }
 
 export default state

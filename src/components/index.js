@@ -4,6 +4,7 @@ import Login from './Login.vue'
 import LoginRegister from './LoginRegister.vue'
 import Admin from './Admin.vue'
 import TopicList from './TopicList.vue'
+import TopicDetail from './TopicDetail.vue'
 
 export {
   Home,
@@ -11,5 +12,6 @@ export {
   Login,
   LoginRegister,
   Admin,
-  TopicList
+  TopicList,
+  TopicDetail
 }

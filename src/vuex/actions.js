@@ -13,13 +13,12 @@ const actions = {
         withCredentials: true
       })
         .then(res => {
-          if (res.data.code) reject(new Error('请求成功，但返回的code不为0'))
+          // if (res.data.code) reject(new Error('请求成功，但返回的code不为0'))
           var userInfo = res.data.user_info
           if (userInfo) {
             commit('setUserInfo', userInfo)
             resolve(userInfo)
           }
-          reject(new Error())
         })
         .catch(err => {
           console.log('从cookie获取userInfo出错，错误信息是：' + err)

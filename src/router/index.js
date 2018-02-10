@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, Register, Admin, TopicList } from '@/components'
+import { Home, Register, Admin, TopicList, TopicDetail } from '@/components'
 import { Users, Topics, Categories, CategoryAdd, TopicAdd } from '@/components/admin/index.js'
 
 Vue.use(Router)
@@ -25,6 +25,14 @@ const router = new Router({
           path: 'category/:_id',
           name: 'TopicList',
           component: TopicList,
+          meta: {
+            hasPage: true
+          }
+        },
+        {
+          path: 'detail/:_id',
+          name: 'TopicDetail',
+          component: TopicDetail,
           meta: {
             hasPage: true
           }

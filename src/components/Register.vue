@@ -33,16 +33,21 @@ export default {
   methods: {
     register () {
       if (!this.data.password.trim() || !this.data.username.trim()) {
-        console.log('用户名和密码不能为空')
+        this.$message({
+          message: '用户名和密码不能为空',
+          type: 'error'
+        })
         return
       }
       if (this.data.password !== this.repeatPassword) {
-        console.log('两次密码输入不相同')
+        this.$message({
+          message: '两次密码输入不相同',
+          type: 'error'
+        })
         return
       }
       axios.post(origin + '/api/user/register', { ...this.data })
         .then(res => {
-          console.log(res.data)
           if (!res.data.code) {
             this.$emit('needChangeTab')
           }

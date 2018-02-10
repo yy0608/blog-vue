@@ -1,18 +1,21 @@
 <template>
 <div class="topic-list">
-  <div class="bf topic-item" v-for="(item, index) in topicList" :key="index">
-    <div class="tc title">{{item.title}}</div>
-    <div class="tags-cont">
-      <div class="category">分类：{{item.category.name}}</div>
-      <div class="author" v-if="item.author">作者：{{item.author.username}}</div>
-      <div class="created-time">{{parseDate(item.created_ts)}}</div>
+  <template v-if="topicList && topicList.length">
+    <div class="bf topic-item" v-for="(item, index) in topicList" :key="index">
+      <div class="tc title">{{item.title}}</div>
+      <div class="tags-cont">
+        <div class="category">分类：{{item.category.name}}</div>
+        <div class="author" v-if="item.author">作者：{{item.author.username}}</div>
+        <div class="created-time">{{parseDate(item.created_ts)}}</div>
+      </div>
+      <div class="intro-cont">{{item.intro}}</div>
+      <div class="see-detail">
+        <a href="javascript:;" @click="goDetail(item._id)">阅读全文</a>
+      </div>
     </div>
-    <div class="intro-cont">{{item.intro}}</div>
-    <div class="see-detail">
-      <router-link to="/detail">阅读全文</router-link>
-    </div>
-  </div>
-  <pagination :change="pageChange" :count="topicCount"></pagination>
+    <pagination :change="pageChange" :count="topicCount"></pagination>
+  </template>
+  <div class="bf tc no-data" v-else>无数据</div>
 </div>
 </template>
 
@@ -33,6 +36,7 @@ export default {
     'topicCount': state => state.homeTopicCount
   }),
   created () {
+    this.getTopicList()
     this.paramsId = this.$route.params._id
     this.$watch('$route', function (newVal, oldVal) {
       this.paramsId = newVal.params._id
@@ -56,7 +60,10 @@ export default {
         })
     },
     goDetail (_id) {
-      console.log(_id)
+      this.$router.push({
+        name: 'TopicDetail',
+        params: { _id }
+      })
     },
     pageChange () {
       this.getTopicList()
@@ -107,5 +114,9 @@ export default {
   a {
     color: #005a90;
   }
+}
+.no-data {
+  line-height: 290px;
+  border-bottom: 1px solid #e0e0e0;
 }
 </style>

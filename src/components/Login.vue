@@ -28,7 +28,10 @@ export default {
   methods: {
     login () {
       if (!this.data.password.trim() || !this.data.username.trim()) {
-        console.log('用户名和密码不能为空')
+        this.$message({
+          message: '用户名和密码不能为空',
+          type: 'error'
+        })
         return
       }
       axios({
@@ -38,7 +41,6 @@ export default {
         withCredentials: true
       })
         .then(res => {
-          console.log(res.data)
           if (res.data.user_info) {
             this.$store.dispatch('setUserInfo', res.data.user_info)
           }
