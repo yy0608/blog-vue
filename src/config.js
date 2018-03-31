@@ -1,4 +1,4 @@
-const origin = 'http://localhost:3000'
+const origin = (process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'http://forumapi.jingia.com')
 // const origin = 'http://forumapi.jingia.com'
 
 const query = {

@@ -107,11 +107,7 @@ export default {
                 type: 'success'
               })
               setTimeout(() => {
-                if (this.edit) {
-                  this.$router.go(-1)
-                } else {
-                  this.$router.go(-1)
-                }
+                this.$router.go(-1)
               }, 1000)
             }
           })
